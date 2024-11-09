@@ -1,8 +1,8 @@
 
-//window
+//canvas
 let width;
 let height;
-//pendulum string
+//pendulum wire
 let lengthOfPendulum;
 let startAngle;
 let endAngle;
@@ -15,18 +15,19 @@ let ballRadius;
 
 
 function setup() {
-  //define global variables
-  width = 600;
-  height = 600;
+  //pendulum wire
   lengthOfPendulum = 200;
   startAngle = PI/4;
   endAngle = 3*PI/4;
   angle = startAngle;
   changeOfAngle = 0.01;
   swingingLeft = true;
+  //Initiate Ball at the end of pendulum
   ball = new Ball(0, 0, 0);
   ballRadius = 20;
-  // 
+  // canvas setup
+  width = 600;
+  height = 600;
   createCanvas(width, height);
   background(20);
   
