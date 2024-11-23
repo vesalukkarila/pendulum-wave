@@ -1,3 +1,10 @@
+// TODOs
+/* 
+1. Put natural swing to it
+- changOfAngle 0 at pi/4 and 3pi/4, changOfAngle grows to e.g. 0.1 towards pi/2 from both directions
+- i.e. 0 -> 0.1
+*/
+
 
 //canvas
 let width;
@@ -71,9 +78,7 @@ function changeAngleOfPendulum(){
   //change swinginLeft to false and decresease angle by X
   swingingLeft = false;
   angle -= changeOfAngle;
-  }
-
-  if (!swingingLeft && angle > startAngle){
+  }else if (!swingingLeft && angle > startAngle){
     //decrease angle by X
     angle -= changeOfAngle;
   }else if (!swingingLeft && angle <= startAngle){
@@ -82,4 +87,14 @@ function changeAngleOfPendulum(){
     angle += changeOfAngle;
   }
 }
+
+// TODO
+/* This equation outputs pendulum lengths, such that, each pendulum moving backward in the series (from longest to shortest)
+moves faster than the one predecing it by exactly one swing over the course of the 'wave' duration
+(the amount of time the pattern repeats itself)*/
+// function lengthOfThisPendulum(lenghtOfLongest, numberFromLongest){
+//   let waveDurationInSeconds = 90;
+
+//   return 9.81*(waveDurationInSeconds/(2 * PI * (lenghtOfLongest + numberFromLongest + 1)));
+// }
 
