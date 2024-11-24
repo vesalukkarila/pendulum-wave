@@ -61,9 +61,8 @@ class Ball {
 }
 // TODOs
 /* 
-1. Put natural swing to it
-- changOfAngle 0 at pi/4 and 3pi/4, changOfAngle grows to e.g. 0.1 towards pi/2 from both directions
-- i.e. 0 -> 0.1
+1. swing could be more gravity-created-like
+2. Stopping at the ends doesn't look natural
 */
 function changeAngleOfPendulumWithNaturalSwing() {
   let mappedAngle = map(currentAngle, PI / 4, (3 * PI) / 4, 0.001, 0.03);
