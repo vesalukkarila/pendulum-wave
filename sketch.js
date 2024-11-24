@@ -13,6 +13,11 @@ let currentAngle;
 let ball;
 let ballRadius;
 
+//new ones
+let angleAcceleration = 0;
+let angleVelocity = 0;
+let gravity = 0.3;
+
 function setup() {
   //pendulum wire
   lengthOfPendulum = 200;
@@ -35,16 +40,29 @@ function setup() {
 function draw() {
   background(20);
 
-  changeAngleOfPendulumWithNaturalSwing();
-
+  //changeAngleOfPendulumWithNaturalSwing();
+  swing();
   //calculate this frame's x and y based on angle
-  let endX = width / 2 + cos(currentAngle) * lengthOfPendulum;
-  let endY = sin(currentAngle) * lengthOfPendulum;
+  let endX = width / 2 + sin(currentAngle) * lengthOfPendulum; //vaihdettu siniks
+  let endY = cos(currentAngle) * lengthOfPendulum; //vaihdettu cosiks
   //draw
   stroke("Aquamarine");
   strokeWeight(1);
   line(width / 2, 0, endX, endY);
   ball.draw(endX, endY, ballRadius);
+}
+
+function swing() {
+  let force = gravity * sin(currentAngle);
+  console.log("force: " + force);
+  angleAcceleration = (-1 * force) / lengthOfPendulum; //ehkä eri lailla
+  console.log("acceleration: " + angleAcceleration);
+  angleVelocity += angleAcceleration;
+  console.log("velocity: " + angleVelocity);
+
+  currentAngle += angleVelocity;
+  console.log("currentAngle: " + currentAngle);
+  console.log("   ");
 }
 
 class Ball {
@@ -64,6 +82,7 @@ class Ball {
 1. swing could be more gravity-created-like
 2. Stopping at the ends doesn't look natural
 */
+/*
 function changeAngleOfPendulumWithNaturalSwing() {
   let mappedAngle = map(currentAngle, PI / 4, (3 * PI) / 4, 0.001, 0.03);
   let speed = mappedAngle;
@@ -116,14 +135,18 @@ function changeAngleOfPendulum(speed) {
     currentAngle += speed;
     console.log(speed);
   }
-}
+}*/
 
 // TODO
 /* This equation outputs pendulum lengths, such that, each pendulum moving backward in the series (from longest to shortest)
 moves faster than the one predecing it by exactly one swing over the course of the 'wave' duration
 (the amount of time the pattern repeats itself)*/
-// function lengthOfThisPendulum(lenghtOfLongest, numberFromLongest){
-//   let waveDurationInSeconds = 90;
+function lengthOfThisPendulum(lenghtOfLongest, numberFromLongest) {
+  let waveDurationInSeconds = 90;
 
-//   return 9.81*(waveDurationInSeconds/(2 * PI * (lenghtOfLongest + numberFromLongest + 1)));
-// }
+  return (
+    9.81 *
+    (waveDurationInSeconds /
+      (2 * PI * (lenghtOfLongest + numberFromLongest + 1)))
+  );
+}
