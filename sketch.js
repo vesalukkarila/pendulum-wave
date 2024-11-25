@@ -23,8 +23,6 @@ function setup() {
       new Ball(ballRadius, currentAngle, lengthOfPendulum - i * 5)
     );
   }
-  // ball = new Ball(ballRadius, currentAngle, lengthOfPendulum);
-  // ball2 = new Ball(ballRadius, currentAngle, lengthOfPendulum + 3);
 
   // canvas setup
   width = 600;
@@ -35,12 +33,6 @@ function setup() {
 
 function draw() {
   background(20);
-  // ball.swing();
-  // ball2.swing();
-  // ball.updatePosition();
-  // ball2.updatePosition();
-  // ball.draw();
-  // ball2.draw();
   pendulumWave.forEach((ball) => {
     ball.draw();
     ball.swing();
@@ -85,6 +77,6 @@ in the series moves faster than the one preceding it by exactly one swing over t
 course of the wave duration
 n = number of pendulum from the longest, i.e. 1 is longest, 2 is second longest
 timeMax = how many seconds before the wave starts from the beginning*/
-function length(n) {
-  let length = 9.81 * pow(timeMax / (2 * PI * (k + n + 1)), 2);
-}
+// function length(n) {
+//   let length = 9.81 * pow(timeMax / (2 * PI * (k + n + 1)), 2);
+// }
