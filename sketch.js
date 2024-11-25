@@ -2,7 +2,7 @@
 let width;
 let height;
 //pendulum wire
-let lengthOfPendulum = 200;
+let lengthOfPendulum = 300;
 let currentAngle;
 //ball itself
 let ballRadius = 20;
@@ -11,16 +11,40 @@ let ball2;
 //forces to play with
 let angleAcceleration = 0;
 let angleVelocity = 0;
-let gravity = 0.3;
+let gravity = 3;
 
 let pendulumWave = [];
+let colors = [
+  "brown",
+  "green",
+  "purple",
+  "blue",
+  "brown",
+  "orange",
+  "darkgreen",
+  "yellow",
+  "red",
+
+  "black",
+  "yellow",
+  "red",
+  "orange",
+  "blue",
+  "brown",
+  "white",
+];
 
 function setup() {
-  currentAngle = PI / 4;
+  currentAngle = PI / 6;
 
   for (let i = 0; i < 16; i++) {
     pendulumWave.push(
-      new Ball(ballRadius, currentAngle, lengthOfPendulum - i * 5)
+      new Ball(
+        ballRadius,
+        currentAngle,
+        lengthOfPendulum - i * (PI * PI),
+        colors[i]
+      )
     );
   }
 
@@ -38,10 +62,13 @@ function draw() {
     ball.swing();
     ball.updatePosition();
   });
+  let timeInSeconds = millis() / 1000;
+  console.log(timeInSeconds.toFixed(2));
+  console.log(length(1));
 }
 
 class Ball {
-  constructor(radius, currentAngle, lengthOfPendulum) {
+  constructor(radius, currentAngle, lengthOfPendulum, color) {
     this.x;
     this.y;
     this.radius = radius;
@@ -50,6 +77,7 @@ class Ball {
     this.angleAcceleration;
     this.angleVelocity = 0;
     this.updatePosition();
+    this.color = color;
   }
 
   swing() {
@@ -68,7 +96,7 @@ class Ball {
     stroke("Aquamarine");
     strokeWeight(1);
     line(width / 2, 0, this.x, this.y);
-    fill(20);
+    fill(this.color);
     circle(this.x, this.y, this.radius);
   }
 }
@@ -77,6 +105,8 @@ in the series moves faster than the one preceding it by exactly one swing over t
 course of the wave duration
 n = number of pendulum from the longest, i.e. 1 is longest, 2 is second longest
 timeMax = how many seconds before the wave starts from the beginning*/
-// function length(n) {
-//   let length = 9.81 * pow(timeMax / (2 * PI * (k + n + 1)), 2);
-// }
+function length(n) {
+  let timeMax = 24;
+  let length = 9.8 * pow(timeMax / (6.28 * (23 + n + 1)), 2);
+  return length;
+}
