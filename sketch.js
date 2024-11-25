@@ -64,7 +64,7 @@ function draw() {
   });
   let timeInSeconds = millis() / 1000;
   console.log(timeInSeconds.toFixed(2));
-  console.log(length(1));
+  // console.log(length(1));
 }
 
 class Ball {
@@ -105,8 +105,8 @@ in the series moves faster than the one preceding it by exactly one swing over t
 course of the wave duration
 n = number of pendulum from the longest, i.e. 1 is longest, 2 is second longest
 timeMax = how many seconds before the wave starts from the beginning*/
-function length(n) {
-  let timeMax = 24;
-  let length = 9.8 * pow(timeMax / (6.28 * (23 + n + 1)), 2);
-  return length;
-}
+// function length(n) {
+//   let timeMax = 24;
+//   let length = 9.8 * pow(timeMax / (6.28 * (23 + n + 1)), 2);
+//   return length;
+// }
