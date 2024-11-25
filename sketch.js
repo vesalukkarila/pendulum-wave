@@ -13,11 +13,19 @@ let angleAcceleration = 0;
 let angleVelocity = 0;
 let gravity = 0.3;
 
+let pendulumWave = [];
+
 function setup() {
   currentAngle = PI / 4;
 
-  ball = new Ball(ballRadius, currentAngle, lengthOfPendulum);
-  ball2 = new Ball(ballRadius, currentAngle, lengthOfPendulum + 50);
+  for (let i = 0; i < 16; i++) {
+    pendulumWave.push(
+      new Ball(ballRadius, currentAngle, lengthOfPendulum - i * 5)
+    );
+  }
+  // ball = new Ball(ballRadius, currentAngle, lengthOfPendulum);
+  // ball2 = new Ball(ballRadius, currentAngle, lengthOfPendulum + 3);
+
   // canvas setup
   width = 600;
   height = 600;
@@ -27,12 +35,17 @@ function setup() {
 
 function draw() {
   background(20);
-  ball.swing();
-  ball2.swing();
-  ball.updatePosition();
-  ball2.updatePosition();
-  ball.draw();
-  ball2.draw();
+  // ball.swing();
+  // ball2.swing();
+  // ball.updatePosition();
+  // ball2.updatePosition();
+  // ball.draw();
+  // ball2.draw();
+  pendulumWave.forEach((ball) => {
+    ball.draw();
+    ball.swing();
+    ball.updatePosition();
+  });
 }
 
 class Ball {
@@ -66,4 +79,12 @@ class Ball {
     fill(20);
     circle(this.x, this.y, this.radius);
   }
+}
+/* This equation outputs pendulum lengths such that each pendulum movinfg backward 
+in the series moves faster than the one preceding it by exactly one swing over the 
+course of the wave duration
+n = number of pendulum from the longest, i.e. 1 is longest, 2 is second longest
+timeMax = how many seconds before the wave starts from the beginning*/
+function length(n) {
+  let length = 9.81 * pow(timeMax / (2 * PI * (k + n + 1)), 2);
 }
